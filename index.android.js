@@ -6,66 +6,54 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
 } from 'react-native';
 
 export default class FlexSample extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {flex: false,
-            currentFlexDirection:0,
-            alignItems:false,
-            justifyContent:false,
-        };
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
-        const flexDirections = ['row','column'];
-        return (
-            <View style={[styles.container]}>
-                <Text style={styles.component1}>
-                    component1
-                </Text>
-                <Text style={styles.component2}>
-                    component2
-                </Text>
-                <Text style={[styles.component3, {flex: 3,}]}>
-                    component3
-                </Text>
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View>
+        <Text>
+          sample1, {formatName(user)}!
+        </Text>
+        {getGreeting(user)}
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: 'navajowhite',
-    },
-    component1: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-        backgroundColor: 'orangered',
-    },
-    component2: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-        backgroundColor: 'dodgerblue',
-    },
+/*
+ Sample1 Embedding Expressions in JSX
+ You can embed any JavaScript expression in JSX by wrapping it in curly braces.
+ */
+function formatName(user) {
+  return user.firstName + ' ' + user.lastName;
+}
 
-    component3: {
-        textAlign: 'center',
-        color: '#333333',
-        backgroundColor: 'lime',
-        marginBottom: 5,
-    }
-});
+const user = {
+  firstName: 'Harper',
+  lastName: 'Perez'
+};
+//end sample1 Embedding Expressions in JSX
+
+/*
+ * Sample2 JSX is an Expression Too
+ After compilation, JSX expressions become regular JavaScript objects.
+ * */
+function getGreeting() {
+  return <Text>
+    sample2, {formatName(user)};
+  </Text>
+}
+// end Sample2 JSX is an Expression Too
+
 
 AppRegistry.registerComponent('FlexSample', () => FlexSample);
