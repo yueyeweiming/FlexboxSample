@@ -18,7 +18,7 @@ const flexDirections = ['column', 'row'];
 const justifyContents = ['flex-start', 'flex-end', 'center', 'space-around', 'space-between'];
 const alignItems = ['stretch', 'flex-start', 'flex-end', 'center', 'baseline'];
 const alignSelfs = ['auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline'];
-const flexs = [1, 3, 7];
+const wrapContents = ['wrap', 'nowrap'];
 
 
 export default class FlexSample extends Component {
@@ -32,7 +32,9 @@ export default class FlexSample extends Component {
       alignItemIndex: 0,
       justifyContentIndex: 0,
       alignSelfIndex: 0,
-    };
+      wrapIndex: 0,
+    }
+    ;
   }
 
   changeFlex = () => {
@@ -58,8 +60,12 @@ export default class FlexSample extends Component {
     this.setState({alignSelfIndex: ((this.state.alignSelfIndex + 1) % alignSelfs.length)});
   }
 
-  changeAlignItems = () => {
+  changeAlignItem = () => {
     this.setState({alignItemIndex: ((this.state.alignItemIndex + 1) % alignItems.length)});
+  }
+
+  changeWrap = () => {
+    this.setState({wrapIndex: ((this.state.wrapIndex + 1) % wrapContents.length)});
   }
 
 
@@ -86,16 +92,23 @@ export default class FlexSample extends Component {
           </Button>
 
           <Button title={'alignItems:\n' + alignItems[this.state.alignItemIndex]}
-                  onPress={this.changeAlignItems}>
+                  onPress={this.changeAlignItem}>
+          </Button>
+
+          <Button title={'flex-wrap:\n' + wrapContents[this.state.wrapIndex]}
+                  onPress={this.changeWrap}>
           </Button>
 
         </View>
 
-        <View style={[styles.container, {
+        <View style={[,{
+          backgroundColor:'#ffffff',
           flex: 7,
           flexDirection: flexDirections[this.state.currentFlexDirection],
           justifyContent: justifyContents[this.state.justifyContentIndex],
           alignItems: alignItems[this.state.alignItemIndex],
+          flexWrap: wrapContents[this.state.wrapIndex],
+          overflow
         }]}>
           <Text style={[styles.component1, {flex: this.state.commonComponentFlex}]}>
             component1
