@@ -1,0 +1,3 @@
+rootProject.name = 'FlexSample'
+
+include ':app'
