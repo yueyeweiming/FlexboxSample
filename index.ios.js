@@ -26,7 +26,8 @@ export default class FlexSample extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flexIndex: 0,
+      commonComponentFlex: 1,
+      component3Flex: 1,
       currentFlexDirection: 0,
       alignItemIndex: 0,
       justifyContentIndex: 0,
@@ -35,11 +36,22 @@ export default class FlexSample extends Component {
   }
 
   changeFlex = () => {
-    this.setState({flexIndex: ((this.state.flexIndex + 1) % flexs.length)});
+    this.setState({
+      component3Flex: (this.state.component3Flex + 1) % 5,
+      commonComponentFlex: 1,
+    });
   }
 
   changeFlexDirection = () => {
     this.setState({currentFlexDirection: ((this.state.currentFlexDirection + 1) % flexDirections.length)});
+  }
+
+  changeJustifyContent = () => {
+    this.setState({
+      justifyContentIndex: ((this.state.justifyContentIndex + 1) % justifyContents.length),
+      commonComponentFlex: 0,
+      component3Flex: 0
+    })
   }
 
 
@@ -49,12 +61,18 @@ export default class FlexSample extends Component {
       <View style={[styles.container, {flexDirection: 'row', marginTop: 20}]}>
 
         <View style={{alignItems: 'center', flex: 4, height: 500}}>
-          <Button title={'child3\'s flex:\n' + flexs[this.state.flexIndex]}
+          <Button title={'child3\'s flex:\n' + this.state.component3Flex}
                   onPress={this.changeFlex}>
           </Button>
+
           <Button title={'flexDirection:\n' + flexDirections[this.state.currentFlexDirection]}
                   onPress={this.changeFlexDirection}>
           </Button>
+
+          <Button title={'justifyContent:\n' + justifyContents[this.state.justifyContentIndex]}
+                  onPress={this.changeJustifyContent}>
+          </Button>
+
         </View>
 
         <View style={[styles.container, {
@@ -63,14 +81,14 @@ export default class FlexSample extends Component {
           justifyContent: justifyContents[this.state.justifyContentIndex],
           alignItems: alignItems[this.state.alignItemIndex],
         }]}>
-          <Text style={styles.component1}>
+          <Text style={[styles.component1, {flex: this.state.commonComponentFlex}]}>
             component1
           </Text>
-          <Text style={styles.component2}>
+          <Text style={[styles.component2, {flex: this.state.commonComponentFlex}]}>
             component2
           </Text>
           <Text style={[styles.component3, {
-            flex: flexs[this.state.flexIndex],
+            flex: this.state.component3Flex,
             alignSelf: alignSelfs[this.state.alignSelfIndex]
           }]}>
             component3
@@ -92,13 +110,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     backgroundColor: 'orangered',
-    flex: 1
   },
   component2: {
     textAlign: 'center',
     color: '#333333',
     backgroundColor: 'dodgerblue',
-    flex: 1
   },
 
   component3: {
