@@ -14,6 +14,13 @@ import {
 } from 'react-native';
 import Toast from 'react-native-root-toast'
 
+const flexDirections = ['column', 'row'];
+const justifyContents = ['flex-start', 'flex-end', 'center', 'space-around', 'space-between'];
+const alignItems = ['stretch', 'flex-start', 'flex-end', 'center', 'baseline'];
+const alignSelfs = ['auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline'];
+const flexs = [1, 3, 7];
+
+
 export default class FlexSample extends Component {
 
   constructor(props) {
@@ -31,8 +38,8 @@ export default class FlexSample extends Component {
     this.setState({flexIndex: ((this.state.flexIndex + 1) % flexs.length)});
   }
 
-  changeTitle = () => {
-    Toast.show('test', {position: Toast.positions.CENTER});
+  changeFlexDirection = () => {
+    this.setState({currentFlexDirection: ((this.state.currentFlexDirection + 1) % flexDirections.length)});
   }
 
 
@@ -40,15 +47,16 @@ export default class FlexSample extends Component {
 
     return (
       <View style={[styles.container, {flexDirection: 'row', marginTop: 20}]}>
+
         <View style={{alignItems: 'center', flex: 4, height: 500}}>
           <Button title={'child3\'s flex:\n' + flexs[this.state.flexIndex]}
                   onPress={this.changeFlex}>
           </Button>
-
           <Button title={'flexDirection:\n' + flexDirections[this.state.currentFlexDirection]}
-                  onPress={this.onPressTest}>
+                  onPress={this.changeFlexDirection}>
           </Button>
         </View>
+
         <View style={[styles.container, {
           flex: 7,
           flexDirection: flexDirections[this.state.currentFlexDirection],
@@ -99,10 +107,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'lime',
   }
 });
-const flexDirections = ['column', 'row'];
-const justifyContents = ['flex-start', 'flex-end', 'center', 'space-around', 'space-between'];
-const alignItems = ['stretch', 'flex-start', 'flex-end', 'center', 'baseline'];
-const alignSelfs = ['auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline'];
-const flexs = [1, 3, 7];
 
 AppRegistry.registerComponent('FlexSample', () => FlexSample);
