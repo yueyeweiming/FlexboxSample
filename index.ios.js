@@ -16,8 +16,8 @@ import Toast from 'react-native-root-toast'
 
 const flexDirections = ['column', 'row'];
 const justifyContents = ['flex-start', 'flex-end', 'center', 'space-around', 'space-between'];
-const alignItems = ['stretch', 'flex-start', 'flex-end', 'center', 'baseline'];
-const alignSelfs = ['auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline'];
+const alignItems = ['stretch', 'flex-start', 'flex-end', 'center',];
+const alignSelfs = ['auto', 'flex-start', 'flex-end', 'center', 'stretch'];
 const wrapContents = ['wrap', 'nowrap'];
 
 
@@ -108,7 +108,6 @@ export default class FlexSample extends Component {
           justifyContent: justifyContents[this.state.justifyContentIndex],
           alignItems: alignItems[this.state.alignItemIndex],
           flexWrap: wrapContents[this.state.wrapIndex],
-          overflow
         }]}>
           <Text style={[styles.component1, {flex: this.state.commonComponentFlex}]}>
             component1
