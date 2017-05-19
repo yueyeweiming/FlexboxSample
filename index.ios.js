@@ -54,6 +54,10 @@ export default class FlexSample extends Component {
     })
   }
 
+  changeAlignSelf = () => {
+    this.setState({alignSelfIndex: ((this.state.alignSelfIndex + 1) % alignSelfs.length)});
+  }
+
 
   render() {
 
@@ -72,6 +76,11 @@ export default class FlexSample extends Component {
           <Button title={'justifyContent:\n' + justifyContents[this.state.justifyContentIndex]}
                   onPress={this.changeJustifyContent}>
           </Button>
+
+          <Button title={'alignSelf:\n' + alignSelfs[this.state.alignSelfIndex]}
+                  onPress={this.changeAlignSelf}>
+          </Button>
+
 
         </View>
 
